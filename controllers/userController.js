@@ -9,7 +9,7 @@ const getAllUser = async (req, res) => {
         }
         res.json(result)
     } catch (error) {
-        console.log(error)
+        console.log(error, '<-- error get user')
     }
 }
 
@@ -37,4 +37,25 @@ const createUser = async (req, res) => {
     }
 }
 
-module.exports = { getAllUser, createUser }
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await User.findByPk(id)
+        if (!user) {
+            return res.status(404).json({
+                status: 'failed',
+                message: 'data is not found'
+            })
+        }
+
+        user.destroy()
+        res.json({
+            status: 'ok',
+            message: 'delete successfully'
+        })
+    } catch (error) {
+        console.log(error, 'error delete user');
+    }
+}
+
+module.exports = { getAllUser, createUser, deleteUser }
