@@ -15,11 +15,10 @@ const getAllUser = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const { username, password, token } = req.body
+        const { username, password } = req.body
         const newUser = await User.create({
             username: username,
             password: password,
-            token: token
         })
         res.status(201).json({
             status: 'ok',
@@ -27,7 +26,6 @@ const createUser = async (req, res) => {
                 id: newUser.id,
                 username: newUser.username,
                 password: newUser.password,
-                token: newUser.token,
                 createdAt: newUser.createdAt,
                 updatedAt: newUser.updatedAt
             }
