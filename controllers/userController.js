@@ -60,7 +60,7 @@ const loginUser = async (req, res) => {
         const usernameName = username[0].username
 
         const accessToken = sign({usernameId, usernameName}, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '60s'
+            expiresIn: '20s'
         })
         const refreshToken = sign({usernameId, usernameName}, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '1d'
